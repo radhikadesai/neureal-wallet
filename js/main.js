@@ -6,7 +6,7 @@ var fs = require('fs');
 
 var providers = ethers.providers;
 var Wallet = ethers.Wallet;
-
+var spotprice;
 var myWallet;
 
 var tokenBalance = 0;
@@ -206,7 +206,8 @@ function updateBalance() {
         var messageEl = $('#ethbal');
         var split = ethValue.split(".");
         ethBalance = parseFloat(ethValue);
-        messageEl.html(split[0] + ".<small>" + split[1] + "</small>");
+        // messageEl.html(split[0] + ".<small>" + split[1] + "</small>");
+        messageEl.html(ethValue);
     });
 
     var callPromise = tokenContract.functions.balanceOf(address);
@@ -226,7 +227,8 @@ function updateBalance() {
         var split = atyxValue.split(".");
         tokenBalance = parseFloat(atyxValue);
         $(".neurealspend").html(atyxValue)
-        messageEl.html(split[0] + ".<small>" + split[1] + "</small>");
+        // messageEl.html(split[0] + ".<small>" + split[1] + "</small>");
+        messageEl.html(atyxValue);
 
     });
 
@@ -248,12 +250,27 @@ function SuccessAccess() {
     $(".options").hide();
     $(".walletInput").hide();
     $("#addressArea").attr("class", "row");
+    $("#agldLogo").attr("class", "hidden");
+    $("#hercLogo").toggleClass( "hidden");
     $("#walletActions").attr("class", "row");
     $(".walletInfo").attr("class", "row walletInfo");
+    $("#next").removeClass("hidden");
 }
 
+function hideHERC(){
+    // $(".herc").hide();
+     $("#walletActions").toggleClass( "hidden");
+    $("#AGLDActions").toggleClass( "hidden");
+    $("#agldLogo").toggleClass( "hidden");
+    $("#hercLogo").toggleClass( "hidden");
+    $("#hercWallet").toggleClass("hidden");
+    $("#agldWallet").toggleClass("hidden");
+     $("#agldtext").toggleClass("hidden");
+     $("#herctext").toggleClass("hidden");
+    // $(".AGLD").hide();
+}
 
-function GetEthGas() {
+function GetEthGas() {  
     var price = $("#ethgasprice").val();
     var gaslimit = 21000;
     var txfee = price * gaslimit;
@@ -262,6 +279,40 @@ function GetEthGas() {
     return false;
 }
 
+function getGoldSpotPrice(){
+    setInterval($.get( "http://bellaverage.com/api/baRates", function( data ) {
+                  $( "#spotprice>b" ).html( data.goldRate );
+                  spotprice = data.goldRate;
+                }), 5000);
+}
+
+function spotPriceConvert(){
+
+    var gramRate = spotprice/28.3495;
+    gramRate = parseFloat(gramRate.toFixed(4));
+    var kilogramRate = gramRate*1000;
+    kilogramRate= parseFloat(kilogramRate.toFixed(4))
+    //implement below logic using arr 
+    if(! $( "#spotprice" ).hasClass("hidden")){
+        console.log("in first case")
+        $( "#spotprice" ).addClass("hidden");
+        $( "#spotprice-gm" ).removeClass("hidden");
+        $( "#spotprice-gm>b" ).html( gramRate );
+        return;
+    }
+    if(! $( "#spotprice-gm" ).hasClass("hidden")){
+        $( "#spotprice-gm" ).addClass("hidden");
+        $( "#spotprice-kg" ).removeClass("hidden");
+        $( "#spotprice-kg>b" ).html( kilogramRate );
+        return;
+    }
+    if(! $( "#spotprice-kg" ).hasClass("hidden")){
+        $( "#spotprice-kg" ).addClass("hidden");
+        $( "#spotprice" ).removeClass("hidden");
+        $( "#spotprice>b" ).html( data.goldRate );
+        return;
+    }
+}
 
 function GetTokenGas() {
     var price = $("#tokengasprice").val();

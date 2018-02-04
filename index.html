@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Иeureal Wallet</title>
+    <title>AGLD Wallet</title>
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="style/bootstrap.min.css">
 </head>
@@ -13,25 +13,49 @@
     <div class="draggable"></div>
 
     <button type="button" onclick="QuitAppButton();" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-
-    <img src="images/logo.png" class="logo">
-
+    <div id="agldLogo" class="logo">
+        <img src="images/AGLDlogo.png" class="logo">
+    </div>
+    <div id="hercLogo" class="logo hidden">
+        <img src="images/herclogo.png" class="logo">
+    </div>
     <div class="options text-center">
         <button class="btn btn-link" onclick="UseKeystore();">Use Keystore JSON</button>
         <button class="btn btn-link" onclick="UsePrivateKey();">Use Private Key</button>
         <button class="btn btn-link" onclick="OpenMyEtherWallet();">Create New Wallet</button>
     </div>
 
-    <div class="row walletInfo hidden">
+    <div id="hercWallet" class="row walletInfo hidden">
 
         <div class="col-xs-4 col-xs-offset-2 coinBox">
-            <b id="neurealbal">0.0000</b>NECP
+            <b id="neurealbal">0.0000</b>HERC
         </div>
 
         <div class="col-xs-4 coinBox">
             <b id="ethbal">0.0000</b>ETH
         </div>
+    </div>
 
+    <div id="agldWallet" class="row  hidden">
+
+        <div class="col-xs-4 col-xs-offset-2 coinBox">
+            <b id="neurealbal">0.0000</b>AGLD
+        </div>
+
+        <div class="col-xs-4 coinBox">
+            <div id="spotprice" class="coinBox">
+                <b >0.0000</b>
+                oz
+            </div>
+            <div id="spotprice-gm" class="coinBox hidden">
+                <b >0.0000</b>
+                gm
+            </div>
+            <div id="spotprice-kg" class="coinBox hidden">
+                <b >0.0000</b>
+               kg
+            </div>
+        </div>
     </div>
 
     <div id="addressArea" class="row hidden">
@@ -40,16 +64,26 @@
 
     <div id="walletActions" class="row hidden">
 
-        <button type="button" class="btn btn-danger btn-lg" data-toggle="modal" data-target="#neurealmodal" onclick="UpdateTokenFeeETH();">
-            Send Иeureal
+        <button type="button" class="btn btn-lg sendTokenLeft herc" data-toggle="modal" data-target="#neurealmodal" onclick="UpdateTokenFeeETH();">
+            Send HERC
           </button>
 
-        <button type="button" class="btn btn-danger btn-lg" data-toggle="modal" data-target="#ethermodal" onclick="UpdateAvailableETH();">
+        <button type="button" class="btn btn-lg sendTokenRight herc" data-toggle="modal" data-target="#ethermodal" onclick="UpdateAvailableETH();">
             Send Ether
           </button>
 
     </div>
+    <div id="AGLDActions" class="row hidden">
 
+        <button type="button" class="btn btn-lg sendTokenLeft AGLD" data-toggle="modal" data-target="#neurealmodal" onclick="UpdateTokenFeeETH();">
+            Send AGLD
+          </button>
+
+        <button type="button" class="btn btn-lg sendTokenRight AGLD" onclick="spotPriceConvert();">
+            Spot Price
+          </button>
+
+    </div>
 
     <div class="walletInput col-xs-7 col-xs-offset-3">
 
@@ -74,7 +108,12 @@
         </div>
 
     </div>
-
+    <div id="next" class="hidden">
+        <button class="nextPageLink" onclick="hideHERC()"><img class="buttonImg" src="images/next.png">
+        <div id="agldtext">AGLD</div>
+        <div id="herctext" class="hidden">HERC</div>
+        </button>
+    </div>
 
 
 
@@ -86,6 +125,7 @@
     <script>
         // You can also require other files to run in this process
         require('./renderer.js')
+        
     </script>
 
 
@@ -135,7 +175,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title" id="myModalLabel">Send Иeureal Coin</h4>
+                    <h4 class="modal-title" id="myModalLabel">Send HERC Coin</h4>
                 </div>
                 <div class="modal-body">
 
@@ -149,9 +189,9 @@
                     <div class="form-group">
                         <div class="input-group">
                             <input type="text" id="send_amount_token" class="form-control" aria-label="Amount (to the nearest dollar)" placeholder="0.0" onkeyup="CheckTokenAvailable();">
-                            <span class="input-group-addon">Иeureal</span>
+                            <span class="input-group-addon">HERC</span>
                         </div>
-                        <p class="help-block"><u class="neurealspend">0.0</u> NECP Available | <u class="ethavailable">0.0</u> ETH Available | Gas Limit: 65000</p>
+                        <p class="help-block"><u class="neurealspend">0.0</u> HERC Available | <u class="ethavailable">0.0</u> ETH Available | Gas Limit: 65000</p>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -218,7 +258,7 @@
 
     <span class="about" data-toggle="modal" data-target="#aboutmodal">About v0.0.1</span>
 
-    <span class="portfolio">NECP: $<span id="portfolioNeureal">0.00</span> <span class="miniprice" id="portNeurealUSD">(0.00)</span> | ETH: $<span id="portfolioEth">0.00</span> <span class="miniprice" id="portEthUSD">(0.00)</span> | TOTAL: $<span id="portfolioTotal">0.00</span></span>
+    <span class="portfolio">HERC: $<span id="portfolioNeureal">0.00</span> <span class="miniprice" id="portNeurealUSD">(0.00)</span> | ETH: $<span id="portfolioEth">0.00</span> <span class="miniprice" id="portEthUSD">(0.00)</span> | TOTAL: $<span id="portfolioTotal">0.00</span></span>
 
 </body>
 
@@ -232,5 +272,8 @@
 <script src="js/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/main.js"></script>
+<script type="text/javascript">
+    getGoldSpotPrice();
+</script>
 
 </html>
