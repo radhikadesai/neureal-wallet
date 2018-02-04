@@ -59,7 +59,7 @@
     </div>
 
     <div id="addressArea" class="row hidden">
-        <span class="myaddress" onclick="CopyAddress();">0x</span>
+        <span class="myaddress labelStyle" onclick="CopyAddress();">0x</span>
     </div>
 
     <div id="walletActions" class="row hidden">
@@ -89,11 +89,11 @@
 
         <div id="keystoreupload" class="">
             <div class="form-group">
-                <label for="exampleInputEmail1">Keystore JSON File</label>
+                <label class="labelStyle" for="exampleInputEmail1">Keystore JSON File</label>
                 <button onclick="OpenKeystoreFile();">Open Keystore File</button>
             </div>
             <div class="form-group">
-                <label for="walletpass">Wallet Password</label>
+                <label class="labelStyle" for="walletpass">Wallet Password</label>
                 <input type="password" class="form-control" id="keystorewalletpass" placeholder="Ethereum Wallet Keystore Password">
             </div>
             <button type="submit" class="btn btn-default" id="keystorebtn" onclick="UnlockWalletKeystore();">Open</button> <p class="errorInfo text-info pull-right" id="keystorejsonerror">Incorrect Password for Keystore Wallet</p>
@@ -101,7 +101,7 @@
 
         <div id="privatekey" class="hidden">
             <div class="form-group">
-                <label for="walletpass">Wallet Private Key</label>
+                <label class="labelStyle" for="walletpass">Wallet Private Key</label>
                 <input type="password" class="form-control" id="privatepass" placeholder="Ethereum Private Key">
             </div>
             <button type="submit" class="btn btn-default" onclick="OpenPrivateKey();">Open</button> <p class="errorInfo text-info pull-right" id="privatekeyerror">Invalid Ethereum Wallet Private Key</p>

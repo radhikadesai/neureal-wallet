@@ -153,6 +153,9 @@ BODY {
 .btn {
     border-radius: 0;
 }
+.labelStyle {
+    color: gray;
+}
 .sendTokenLeft{
     background-color: #ebb911;
     color: black;
