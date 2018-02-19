@@ -16,16 +16,16 @@
     <div id="agldLogo" class="logo">
         <img src="images/AGLDlogo.png" class="logo">
     </div>
-    <div id="hercLogo" class="logo hidden">
+    <!-- <div id="hercLogo" class="logo hidden">
         <img src="images/herclogo.png" class="logo">
-    </div>
+    </div> -->
     <div class="options text-center">
         <button class="btn btn-link" onclick="UseKeystore();">Use Keystore JSON</button>
         <button class="btn btn-link" onclick="UsePrivateKey();">Use Private Key</button>
         <button class="btn btn-link" onclick="OpenMyEtherWallet();">Create New Wallet</button>
     </div>
 
-    <div id="hercWallet" class="row walletInfo hidden">
+  <!--   <div id="hercWallet" class="row walletInfo hidden">
 
         <div class="col-xs-4 col-xs-offset-2 coinBox">
             <b id="neurealbal">0.0000</b>HERC
@@ -34,9 +34,9 @@
         <div class="col-xs-4 coinBox">
             <b id="ethbal">0.0000</b>ETH
         </div>
-    </div>
+    </div> -->
 
-    <div id="agldWallet" class="row  hidden">
+    <div id="agldWallet" class="row walletInfo hidden">
 
         <div class="col-xs-4 col-xs-offset-2 coinBox">
             <b id="neurealbal">0.0000</b>AGLD
@@ -62,7 +62,7 @@
         <span class="myaddress labelStyle" onclick="CopyAddress();">0x</span>
     </div>
 
-    <div id="walletActions" class="row hidden">
+ <!--    <div id="walletActions" class="row hidden">
 
         <button type="button" class="btn btn-lg sendTokenLeft herc" data-toggle="modal" data-target="#neurealmodal" onclick="UpdateTokenFeeETH();">
             Send HERC
@@ -72,7 +72,7 @@
             Send Ether
           </button>
 
-    </div>
+    </div> -->
     <div id="AGLDActions" class="row hidden">
 
         <button type="button" class="btn btn-lg sendTokenLeft AGLD" data-toggle="modal" data-target="#neurealmodal" onclick="UpdateTokenFeeETH();">
@@ -108,13 +108,7 @@
         </div>
 
     </div>
-    <div id="next" class="hidden">
-        <button class="nextPageLink" onclick="hideHERC()"><img class="buttonImg" src="images/next.png">
-        <div id="agldtext">AGLD</div>
-        <div id="herctext" class="hidden">HERC</div>
-        </button>
-    </div>
-
+  
 
 
 

@@ -250,11 +250,10 @@ function SuccessAccess() {
     $(".options").hide();
     $(".walletInput").hide();
     $("#addressArea").attr("class", "row");
-    $("#agldLogo").attr("class", "hidden");
-    $("#hercLogo").toggleClass( "hidden");
-    $("#walletActions").attr("class", "row");
+    // $("#agldLogo").attr("class", "hidden");
+    // $("#hercLogo").toggleClass( "hidden");
+    $("#AGLDActions").attr("class", "row");
     $(".walletInfo").attr("class", "row walletInfo");
-    $("#next").removeClass("hidden");
 }
 
 function hideHERC(){
